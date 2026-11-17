@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Componentes y Sustancias en Cosmética | Guía Interactiva</title>
+  <!-- Tailwind CSS para diseño moderno y responsive -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fuente Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            navy: '#1E293B',
+            lavender: {
+              50: '#F5F3FF',
+              100: '#EDE9FE',
+              200: '#DDD6FE',
+              500: '#8B5CF6',
+              600: '#7C3AED',
+            },
+            coral: {
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              400: '#FB7185',
+              500: '#F43F5E',
+            },
+            mint: {
+              50: '#ECFDF5',
+              100: '#D1FAE5',
+              500: '#10B981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilos personalizados para animaciones estilo Genially y tarjetas 3D */
+    body {
+      background: linear-gradient(135deg, #F5F3FF 0%, #FFF1F2 50%, #ECFDF5 100%);
+      color: #1E293B;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 30px -5px rgba(30, 41, 59, 0.08);
+    }
+
+    /* Animación suave de entrada de diapositivas */
+    .slide-enter {
+      animation: slideFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Flashcards 3D Flip */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Pulsación tipo hotspot Genially */
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+    }
+    .genially-hotspot {
+      animation: pulseRing 2.2s infinite;
+    }
+
+    /* Confeti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(241, 245, 249, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between selection:bg-lavender-200 selection:text-navy">
+
+  <!-- Canvas para celebración con confeti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- BARRA SUPERIOR DE NAVEGACIÓN TIPO GENIALLY -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/70 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <!-- Logo / Título corto -->
+      <button onclick="goToSlide(0)" class="flex items-center gap-2.5 text-left group focus:outline-none">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender-500 to-coral-400 flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform">
+          🧴
+        </div>
+        <div>
+          <span class="font-display font-bold text-sm sm:text-base text-navy block leading-tight">Cosmética Profesional</span>
+          <span class="text-xs text-slate-500 font-medium">Peluquería y Estética</span>
+        </div>
+      </button>
+
+      <!-- Pestañas de navegación rápida -->
+      <nav class="flex items-center gap-1 sm:gap-2 bg-slate-100/90 p-1.5 rounded-2xl overflow-x-auto max-w-full">
+        <button onclick="goToSlide(0)" id="nav-btn-0" class="nav-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap">
+          🏠 Portada
+        </button>
+        <button onclick="goToSlide(1)" id="nav-btn-1" class="nav-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap">
+          📚 Temario
+        </button>
+        <button onclick="goToSlide(2)" id="nav-btn-2" class="nav-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap">
+          🗂️ Flashcards
+        </button>
+        <button onclick="goToSlide(3)" id="nav-btn-3" class="nav-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap">
+          🎮 Actividades
+        </button>
+      </nav>
+
+      <!-- Marcador de Puntos y Reinicio -->
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl shadow-sm" title="Puntos acumulados estudiando y jugando">
+          <span class="text-base">⭐</span>
+          <span id="header-points" class="font-display font-bold text-sm text-amber-800">0 pts</span>
+        </div>
+        <button onclick="openResetModal()" class="p-2 rounded-xl text-slate-500 hover:text-coral-500 hover:bg-coral-50 transition-colors" title="Reiniciar progreso">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Barra de progreso global -->
+    <div class="max-w-6xl mx-auto mt-2.5 flex items-center gap-3">
+      <div class="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden">
+        <div id="global-progress-bar" class="bg-gradient-to-r from-lavender-500 via-coral-400 to-mint-500 h-full rounded-full transition-all duration-500" style="width: 25%"></div>
+      </div>
+      <span id="slide-indicator" class="text-xs font-bold text-slate-500 whitespace-nowrap">1 / 4</span>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL DE DIAPOSITIVAS -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ===================================================================== -->
+    <!-- DIAPOSITIVA 1: PORTADA INTERACTIVA                                    -->
+    <!-- ===================================================================== -->
+    <section id="slide-0" class="slide-section slide-enter">
+      <div class="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+        <!-- Decoración geométrica de fondo -->
+        <div class="absolute -top-24 -right-24 w-72 h-72 bg-lavender-200/40 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-mint-200/40 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lavender-100 text-lavender-600 font-semibold text-xs sm:text-sm">
+              <span>✨</span> Recurso Interactivo de Estudio y Repaso
+            </div>
+            
+            <h1 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-navy leading-tight">
+              Componentes y Sustancias en <span class="text-transparent bg-clip-text bg-gradient-to-r from-lavender-600 to-coral-500">Cosmética</span>
+            </h1>
+            
+            <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+              Guía interactiva de estudio y repaso para <strong>Peluquería y Estética</strong>. Explora cada ingrediente cosmético, descubre su función química y pon a prueba tus conocimientos con retos prácticos.
+            </p>
+
+            <!-- Botones de acceso rápido -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <button onclick="goToSlide(1)" class="flex items-center justify-center gap-2 bg-lavender-600 hover:bg-lavender-500 text-white font-semibold py-3.5 px-5 rounded-2xl shadow-lg shadow-lavender-500/25 transition-all hover:-translate-y-0.5">
+                <span>📚</span> Explorar Temario
+              </button>
+              <button onclick="goToSlide(2)" class="flex items-center justify-center gap-2 bg-white hover:bg-coral-50 text-navy border-2 border-coral-200 font-semibold py-3.5 px-5 rounded-2xl transition-all hover:-translate-y-0.5">
+                <span>🗂️</span> Flashcards 3D
+              </button>
+              <button onclick="goToSlide(3)" class="flex items-center justify-center gap-2 bg-mint-600 hover:bg-mint-500 text-white font-semibold py-3.5 px-5 rounded-2xl shadow-lg shadow-mint-500/25 transition-all hover:-translate-y-0.5">
+                <span>🎮</span> Retos y Test
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel de estado del alumno -->
+          <div class="lg:col-span-5">
+            <div class="bg-white/90 rounded-3xl p-6 border border-slate-200/80 shadow-xl space-y-5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <h2 class="font-display font-bold text-lg text-navy">Tu Panel de Progreso</h2>
+                  <p class="text-xs text-slate-500">Se guarda automáticamente en este navegador</p>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold">
+                  🏆
+                </div>
+              </div>
+
+              <!-- Estadísticas -->
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-lavender-50 p-3.5 rounded-2xl border border-lavender-100">
+                  <span class="text-xs font-semibold text-lavender-600 block">Puntos Totales</span>
+                  <span id="dash-points" class="font-display font-extrabold text-2xl text-navy">0</span>
+                </div>
+                <div class="bg-mint-50 p-3.5 rounded-2xl border border-mint-100">
+                  <span class="text-xs font-semibold text-mint-600 block">Tarjetas Dominadas</span>
+                  <span id="dash-cards" class="font-display font-extrabold text-2xl text-navy">0 / 16</span>
+                </div>
+                <div class="bg-coral-50 p-3.5 rounded-2xl border border-coral-100">
+                  <span class="text-xs font-semibold text-coral-500 block">Mejor Nota Test</span>
+                  <span id="dash-quiz" class="font-display font-extrabold text-2xl text-navy">- / 10</span>
+                </div>
+                <div class="bg-sky-50 p-3.5 rounded-2xl border border-sky-100">
+                  <span class="text-xs font-semibold text-sky-600 block">Fichas Leídas</span>
+                  <span id="dash-topics" class="font-display font-extrabold text-2xl text-navy">0 / 16</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 rounded-2xl p-3.5 text-xs text-slate-600 flex items-start gap-2.5">
+                <span class="text-base">💡</span>
+                <p><strong>Consejo de estudio:</strong> Haz clic en las tarjetas del temario para abrir sus fichas detalladas, repasa con las Flashcards y completa las 3 actividades para conseguir la máxima puntuación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- DIAPOSITIVA 2: TEMARIO INTERACTIVO POR CATEGORÍAS                     -->
+    <!-- ===================================================================== -->
+    <section id="slide-1" class="slide-section hidden space-y-6">
+      <!-- Encabezado y filtros -->
+      <div class="glass-panel rounded-3xl p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-lavender-600">Bloque 1 · Exploración Interactiva</span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy mt-1">Familias de Ingredientes Cosméticos</h2>
+            <p class="text-sm text-slate-600 mt-1">Pulsa sobre cualquier tarjeta para ver su función detallada, subtipos y ejemplos químicos del temario.</p>
+          </div>
+          <div class="flex items-center gap-2 bg-lavender-50 px-4 py-2.5 rounded-2xl border border-lavender-200 self-start">
+            <span class="text-lg">🔍</span>
+            <span class="text-xs font-semibold text-lavender-800">Fichas exploradas: <strong id="topics-counter-badge">0/16</strong></span>
+          </div>
+        </div>
+
+        <!-- Filtros de categorías -->
+        <div id="category-filters" class="flex flex-wrap gap-2 mt-5 pt-4 border-t border-slate-100">
+          <!-- Se generan dinámicamente con JS -->
+        </div>
+      </div>
+
+      <!-- Cuadrícula de tarjetas interactivas tipo Genially -->
+      <div id="topics-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Se generan dinámicamente con JS -->
+      </div>
+
+      <!-- Esquema visual interactivo: Radicales Libres y Estrés Oxidativo -->
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 border-2 border-coral-200/80 bg-gradient-to-br from-white to-coral-50/40">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="lg:w-1/2 space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-coral-100 text-coral-600 font-bold text-xs">
+              <span>🔬</span> Esquema Clave del Temario
+            </div>
+            <h3 class="font-display font-extrabold text-xl sm:text-2xl text-navy">¿Cómo actúan los Radicales Libres?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Haz clic en cada fase del proceso celular para comprender por qué son necesarios los <strong>ingredientes activos anti-radicales libres</strong> y los <strong>antioxidantes</strong>.
+            </p>
+            <!-- Caja de explicación dinámica del esquema -->
+            <div id="radical-info-box" class="bg-white p-4 rounded-2xl border border-coral-200 shadow-sm text-sm text-navy">
+              <strong class="text-mint-600 block mb-1">1. Célula Sana:</strong>
+              Estructura celular equilibrada y protegida. Mantiene sus funciones vitales intactas en la piel y el folículo piloso.
+            </div>
+          </div>
+
+          <!-- Diagrama interactivo de 3 pasos -->
+          <div class="lg:w-1/2 w-full grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <button onclick="selectRadicalStep(1)" id="rad-step-1" class="rad-btn ring-2 ring-mint-500 bg-white p-4 rounded-2xl text-center shadow-md transition-all hover:-translate-y-1">
+              <div class="w-14 h-14 mx-auto rounded-full bg-mint-100 text-mint-600 flex items-center justify-center text-2xl mb-2">
+                🟢
+              </div>
+              <span class="font-display font-bold text-sm text-navy block">1. Célula Sana</span>
+              <span class="text-xs text-slate-500 mt-1 block">Equilibrio celular</span>
+            </button>
+
+            <button onclick="selectRadicalStep(2)" id="rad-step-2" class="rad-btn bg-white p-4 rounded-2xl text-center shadow-sm border border-slate-200 transition-all hover:-translate-y-1">
+              <div class="w-14 h-14 mx-auto rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-2 genially-hotspot">
+                ⚡
+              </div>
+              <span class="font-display font-bold text-sm text-navy block">2. Ataque Radical</span>
+              <span class="text-xs text-slate-500 mt-1 block">Radicales libres</span>
+            </button>
+
+            <button onclick="selectRadicalStep(3)" id="rad-step-3" class="rad-btn bg-white p-4 rounded-2xl text-center shadow-sm border border-slate-200 transition-all hover:-translate-y-1">
+              <div class="w-14 h-14 mx-auto rounded-full bg-coral-100 text-coral-600 flex items-center justify-center text-2xl mb-2">
+                💥
+              </div>
+              <span class="font-display font-bold text-sm text-navy block">3. Estrés Oxidativo</span>
+              <span class="text-xs text-slate-500 mt-1 block">Destrucción celular</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- DIAPOSITIVA 3: ZONA DE ESTUDIO - FLASHCARDS 3D                        -->
+    <!-- ===================================================================== -->
+    <section id="slide-2" class="slide-section hidden space-y-6">
+      <div class="glass-panel rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-coral-500">Bloque 2 · Memorización Activa</span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy mt-1">Flashcards de Sustancias Cosméticas</h2>
+            <p class="text-sm text-slate-600 mt-1">Toca la tarjeta para girarla. Marca si ya dominas el concepto para actualizar tu barra de aprendizaje.</p>
+          </div>
+
+          <!-- Progreso de dominio -->
+          <div class="bg-mint-50 border border-mint-200 px-4 py-3 rounded-2xl min-w-[200px]">
+            <div class="flex justify-between text-xs font-bold text-mint-800 mb-1.5">
+              <span>Nivel de Dominio</span>
+              <span id="flashcard-mastery-text">0 / 16</span>
+            </div>
+            <div class="w-full bg-mint-200/60 h-2 rounded-full overflow-hidden">
+              <div id="flashcard-mastery-bar" class="bg-mint-600 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtro de baraja -->
+        <div id="flashcard-filters" class="flex flex-wrap gap-2 mt-4">
+          <!-- Se genera con JS -->
+        </div>
+
+        <!-- Área de la Tarjeta 3D -->
+        <div class="max-w-xl mx-auto my-8">
+          <div class="flex justify-between items-center text-xs font-semibold text-slate-500 mb-2 px-1">
+            <span id="fc-counter">Tarjeta 1 de 16</span>
+            <span id="fc-status-badge" class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">Pendiente</span>
+          </div>
+
+          <!-- Contenedor 3D -->
+          <div onclick="flipFlashcard()" class="perspective-1000 w-full h-72 sm:h-80 cursor-pointer select-none group">
+            <div id="flashcard-inner" class="relative w-full h-full transform-style-3d">
+              
+              <!-- CARA A (FRENTE) -->
+              <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-white via-lavender-50/50 to-coral-50/40 rounded-3xl border-2 border-lavender-200 shadow-xl p-6 sm:p-8 flex flex-col items-center justify-center text-center">
+                <span id="fc-category-tag" class="px-3 py-1 rounded-full bg-lavender-100 text-lavender-700 text-xs font-bold mb-4">
+                  Categoría
+                </span>
+                <div id="fc-icon" class="text-5xl mb-3 group-hover:scale-110 transition-transform">💧</div>
+                <h3 id="fc-front-title" class="font-display font-extrabold text-2xl sm:text-3xl text-navy">
+                  Nombre de la sustancia
+                </h3>
+                <p class="text-xs text-slate-400 mt-5 flex items-center gap-1">
+                  <span>🔄</span> Haz clic para ver función y ejemplos
+                </p>
+              </div>
+
+              <!-- CARA B (REVERSO) -->
+              <div class="absolute inset-0 backface-hidden rotate-y-180 bg-navy text-white rounded-3xl border-2 border-lavender-400 shadow-xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
+                <div>
+                  <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-3">
+                    <span id="fc-back-title" class="font-display font-bold text-lg text-lavender-300">Título</span>
+                    <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-lg text-slate-300">Función y Ejemplos</span>
+                  </div>
+                  <p id="fc-back-desc" class="text-sm sm:text-base text-slate-100 leading-relaxed mb-4">
+                    Descripción de la función...
+                  </p>
+                </div>
+                <div class="bg-slate-800/90 rounded-2xl p-3.5 border border-slate-700">
+                  <span class="text-xs font-bold uppercase tracking-wider text-mint-400 block mb-1">Ejemplos clave:</span>
+                  <p id="fc-back-examples" class="text-xs sm:text-sm text-slate-200 font-medium">
+                    Ejemplos...
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Controles de navegación y autoevaluación de la tarjeta -->
+          <div class="mt-6 space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <button onclick="markFlashcard(false)" class="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-semibold text-sm transition-colors">
+                <span>🔁</span> Repasar más tarde
+              </button>
+              <button onclick="markFlashcard(true)" class="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-mint-600 hover:bg-mint-500 text-white font-semibold text-sm shadow-md shadow-mint-500/20 transition-colors">
+                <span>✅</span> ¡Ya me la sé! (+5 pts)
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <button onclick="prevFlashcard()" class="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-sm font-semibold text-navy transition-colors">
+                ← Anterior
+              </button>
+              <button onclick="shuffleFlashcards()" class="px-4 py-2 rounded-xl bg-lavender-50 hover:bg-lavender-100 text-lavender-700 text-xs font-bold transition-colors">
+                🔀 Mezclar baraja
+              </button>
+              <button onclick="nextFlashcard()" class="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-sm font-semibold text-navy transition-colors">
+                Siguiente →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- DIAPOSITIVA 4: ACTIVIDADES INTERACTIVAS DE REPASO (GAMIFICACIÓN)      -->
+    <!-- ===================================================================== -->
+    <section id="slide-3" class="slide-section hidden space-y-6">
+      <!-- Selector de Actividades -->
+      <div class="glass-panel rounded-3xl p-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-mint-600">Bloque 3 · Gamificación y Evaluación</span>
+        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy mt-1">Actividades Interactivas de Repaso</h2>
+        <p class="text-sm text-slate-600 mt-1">Elige una actividad para poner a prueba todo lo aprendido en clase.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-5">
+          <button onclick="switchActivity('quiz')" id="act-tab-quiz" class="act-tab p-4 rounded-2xl border-2 text-left transition-all flex items-start gap-3">
+            <span class="text-2xl">📝</span>
+            <div>
+              <span class="font-display font-bold text-sm sm:text-base block">1. Test Tipo Examen</span>
+              <span class="text-xs opacity-80">12 preguntas con nota sobre 10</span>
+            </div>
+          </button>
+
+          <button onclick="switchActivity('lab')" id="act-tab-lab" class="act-tab p-4 rounded-2xl border-2 text-left transition-all flex items-start gap-3">
+            <span class="text-2xl">🧪</span>
+            <div>
+              <span class="font-display font-bold text-sm sm:text-base block">2. Laboratorio Cosmético</span>
+              <span class="text-xs opacity-80">5 casos prácticos de salón</span>
+            </div>
+          </button>
+
+          <button onclick="switchActivity('match')" id="act-tab-match" class="act-tab p-4 rounded-2xl border-2 text-left transition-all flex items-start gap-3">
+            <span class="text-2xl">🎯</span>
+            <div>
+              <span class="font-display font-bold text-sm sm:text-base block">3. Clasifica el Ingrediente</span>
+              <span class="text-xs opacity-80">Asocia cada ejemplo a su familia</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- CONTENEDOR ACTIVIDAD 1: TEST DE AUTOEVALUACIÓN (12 PREGUNTAS) -->
+      <div id="activity-quiz" class="glass-panel rounded-3xl p-6 sm:p-8">
+        <div id="quiz-container">
+          <!-- Se renderiza dinámicamente -->
+        </div>
+      </div>
+
+      <!-- CONTENEDOR ACTIVIDAD 2: EL LABORATORIO COSMÉTICO (5 CASOS PRÁCTICOS) -->
+      <div id="activity-lab" class="glass-panel rounded-3xl p-6 sm:p-8 hidden">
+        <div id="lab-container">
+          <!-- Se renderiza dinámicamente -->
+        </div>
+      </div>
+
+      <!-- CONTENEDOR ACTIVIDAD 3: CLASIFICA EL INGREDIENTE -->
+      <div id="activity-match" class="glass-panel rounded-3xl p-6 sm:p-8 hidden">
+        <div id="match-container">
+          <!-- Se renderiza dinámicamente -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BARRA INFERIOR DE NAVEGACIÓN ENTRE DIAPOSITIVAS -->
+  <footer class="glass-panel border-t border-slate-200/70 px-4 py-3 mt-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <button id="btn-prev-slide" onclick="prevSlide()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-sm font-semibold text-navy disabled:opacity-40 disabled:pointer-events-none transition-all">
+        <span>←</span> Anterior
+      </button>
+
+      <div class="hidden sm:flex items-center gap-2">
+        <button onclick="goToSlide(0)" class="dot-indicator w-2.5 h-2.5 rounded-full bg-lavender-600 transition-all"></button>
+        <button onclick="goToSlide(1)" class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-300 transition-all"></button>
+        <button onclick="goToSlide(2)" class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-300 transition-all"></button>
+        <button onclick="goToSlide(3)" class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-300 transition-all"></button>
+      </div>
+
+      <button id="btn-next-slide" onclick="nextSlide()" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy hover:bg-slate-800 text-white text-sm font-semibold disabled:opacity-40 disabled:pointer-events-none transition-all">
+        Siguiente <span>→</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL DETALLADO DE INGREDIENTE (ESTILO GENIALLY POPUP)                -->
+  <!-- ===================================================================== -->
+  <div id="topic-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative slide-enter max-h-[90vh] overflow-y-auto">
+      <button onclick="closeTopicModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-coral-100 text-slate-600 hover:text-coral-600 flex items-center justify-center font-bold transition-colors">
+        ✕
+      </button>
+
+      <div id="modal-category-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3">
+        Categoría
+      </div>
+
+      <div class="flex items-center gap-3 mb-4">
+        <span id="modal-icon" class="text-4xl">💧</span>
+        <h3 id="modal-title" class="font-display font-extrabold text-2xl text-navy">Nombre</h3>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/70">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Función en el cosmético</h4>
+          <p id="modal-function" class="text-sm sm:text-base text-navy leading-relaxed"></p>
+        </div>
+
+        <div id="modal-subtypes-box" class="bg-lavender-50/70 p-4 rounded-2xl border border-lavender-200/70 hidden">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-lavender-700 mb-1.5">Clasificación / Subtipos</h4>
+          <div id="modal-subtypes" class="text-sm text-navy space-y-1.5"></div>
+        </div>
+
+        <div class="bg-mint-50/80 p-4 rounded-2xl border border-mint-200">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-mint-700 mb-1.5">Ejemplos del temario</h4>
+          <p id="modal-examples" class="text-sm font-semibold text-navy"></p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeTopicModal()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-navy hover:bg-slate-800 text-white font-semibold text-sm transition-colors">
+          ¡Entendido!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL DE CONFIRMACIÓN DE REINICIO (SIN USAR confirm())                -->
+  <!-- ===================================================================== -->
+  <div id="reset-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center slide-enter">
+      <div class="w-14 h-14 rounded-full bg-coral-100 text-coral-500 flex items-center justify-center text-2xl mx-auto mb-3">
+        🔄
+      </div>
+      <h3 class="font-display font-bold text-xl text-navy">¿Reiniciar todo el progreso?</h3>
+      <p class="text-sm text-slate-600 mt-2">Se borrarán tus puntos, las tarjetas dominadas y las notas de los ejercicios para empezar desde cero.</p>
+      <div class="grid grid-cols-2 gap-3 mt-6">
+        <button onclick="closeResetModal()" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-navy font-semibold text-sm">
+          Cancelar
+        </button>
+        <button onclick="confirmResetProgress()" class="py-2.5 px-4 rounded-xl bg-coral-500 hover:bg-coral-600 text-white font-semibold text-sm">
+          Sí, reiniciar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TOAST DE NOTIFICACIÓN FLOTANTE                                        -->
+  <!-- ===================================================================== -->
+  <div id="toast" class="fixed bottom-20 right-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-navy text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-sm font-semibold">
+      <span id="toast-icon">⭐</span>
+      <span id="toast-msg">¡Puntos ganados!</span>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- LÓGICA DE LA APLICACIÓN (DATOS ESTRICTOS DEL TEMARIO E INTERACCIÓN)   -->
+  <!-- ===================================================================== -->
+  <script>
+    // -------------------------------------------------------------------------
+    // 1. BASE DE DATOS ESTRICTA DEL TEMARIO PROPORCIONADO
+    // -------------------------------------------------------------------------
+    const CATEGORIES = [
+      { id: 'all', name: 'Todas las familias', icon: '✨', color: 'bg-navy text-white' },
+      { id: 'base', name: 'Base y Estructura', icon: '🧱', color: 'bg-lavender-100 text-lavender-800 border-lavender-200' },
+      { id: 'hidratacion', name: 'Hidratación y Sensorialidad', icon: '💧', color: 'bg-sky-100 text-sky-800 border-sky-200' },
+      { id: 'capilar', name: 'Tratamientos Capilares', icon: '💇‍♀️', color: 'bg-coral-100 text-coral-800 border-coral-200' },
+      { id: 'proteccion', name: 'Protección, Conservación y Aditivos', icon: '🛡️', color: 'bg-amber-100 text-amber-800 border-amber-200' },
+      { id: 'activos', name: 'Aplicaciones Especiales (Activos)', icon: '🌿', color: 'bg-mint-100 text-mint-800 border-mint-200' }
+    ];
+
+    const INGREDIENTS_DATA = [
+      // --- BASE Y ESTRUCTURA ---
+      {
+        id: 'agua',
+        category: 'base',
+        catLabel: 'Base y Estructura',
+        fcDeck: 'Base y Espuma',
+        icon: '🚰',
+        title: 'Agua',
+        shortDesc: 'Vehículo fundamental sometido a purificación previa.',
+        fullFunction: 'Es un componente muy importante en determinadas formas cosméticas (como lociones, champús o emulsiones). Antes de utilizarla en la elaboración de los cosméticos, se somete obligatoriamente a tratamientos específicos que la purifican.',
+        subtypes: null,
+        examples: 'Agua purificada / desionizada empleada como base en formas cosméticas.'
+      },
+      {
+        id: 'tensioactivos',
+        category: 'base',
+        catLabel: 'Base y Estructura',
+        fcDeck: 'Base y Espuma',
+        icon: '🫧',
+        title: 'Tensioactivos o Emulsionantes',
+        shortDesc: 'Unen agua y grasa para limpiar o formar emulsiones estables.',
+        fullFunction: 'Son los ingredientes que ayudan a que dos sustancias que normalmente no se mezclan (como el agua y la grasa) se disuelvan o dispersen. Limpian la piel y el cabello mezclando agua con grasa y suciedad para su enjuague, y son fundamentales en las emulsiones para que la fase acuosa y la grasa permanezcan unidas.',
+        subtypes: [
+          '<strong>Aniónicos:</strong> Gran poder detergente y espumante (lauril sulfato de sodio o amonio, lauril éter sulfato, estearatos de glicerina).',
+          '<strong>No iónicos:</strong> Muy suaves y compatibles con la piel.',
+          '<strong>Anfóteros:</strong> Suaves y bien tolerados (betaínas).',
+          '<strong>Catiónicos:</strong> Tienen propiedades suavizantes y anti-encrespamiento para el cabello (sales de amonio cuaternario).'
+        ],
+        examples: 'Aniónicos: lauril sulfato de sodio o amonio, lauril éter sulfato, estearatos de glicerina. Catiónicos: sales de amonio cuaternario. Anfóteros: betaínas.'
+      },
+      {
+        id: 'espesantes',
+        category: 'base',
+        catLabel: 'Base y Estructura',
+        fcDeck: 'Base y Espuma',
+        icon: '🍯',
+        title: 'Espesantes',
+        shortDesc: 'Regulan la consistencia y estabilizan las emulsiones.',
+        fullFunction: 'Regulan la consistencia y viscosidad de los productos cosméticos, ayudan a distribuir o suspender un sólido insoluble en un líquido y se emplean para estabilizar las emulsiones, ayudando a evitar que se separen en sus componentes de fase grasa y fase acuosa.',
+        subtypes: null,
+        examples: 'Derivados solubles de la celulosa, gomas naturales (guar, xantana), sales minerales, alcoholes grasos.'
+      },
+      {
+        id: 'espuma',
+        category: 'base',
+        catLabel: 'Base y Estructura',
+        fcDeck: 'Base y Espuma',
+        icon: '🛁',
+        title: 'Estabilizadores de la Espuma',
+        shortDesc: 'Mejoran volumen, duración y tacto cremoso de la espuma.',
+        fullFunction: 'Se añaden a productos de higiene como champús, geles de baño, etc., para incrementar y estabilizar la espuma en volumen, textura y/o duración, además de aportarle un tacto más cremoso y agradable.',
+        subtypes: null,
+        examples: 'Dietanolamidas, anfóteros (betaínas).'
+      },
+
+      // --- HIDRATACIÓN Y SENSORIALIDAD ---
+      {
+        id: 'humectantes',
+        category: 'hidratacion',
+        catLabel: 'Hidratación y Sensorialidad',
+        fcDeck: 'Hidratación y Color',
+        icon: '💦',
+        title: 'Humectantes',
+        shortDesc: 'Atraen y retienen el agua en la piel o el cabello.',
+        fullFunction: 'Atraen y absorben el agua reteniendo la humedad de la piel o del cabello, proporcionando propiedades humectantes e hidratantes.',
+        subtypes: null,
+        examples: 'Glicerina (o glicerol), propilenglicol, sorbitol.'
+      },
+      {
+        id: 'emolientes',
+        category: 'hidratacion',
+        catLabel: 'Hidratación y Sensorialidad',
+        fcDeck: 'Hidratación y Color',
+        icon: '🪶',
+        title: 'Emolientes',
+        shortDesc: 'Suavizan, afinan y ablandan la superficie cutánea.',
+        fullFunction: 'Suavizan y afinan la piel, aportando efecto ablandador y contribuyendo a mantener y aumentar su humedad superficial.',
+        subtypes: null,
+        examples: 'Lanolina y derivados, miristato de isopropilo.'
+      },
+      {
+        id: 'perfumes',
+        category: 'hidratacion',
+        catLabel: 'Hidratación y Sensorialidad',
+        fcDeck: 'Hidratación y Color',
+        icon: '🌸',
+        title: 'Perfumes',
+        shortDesc: 'Aportan olor agradable al producto o perfuman la piel.',
+        fullFunction: 'Son mezclas complejas de aceites esenciales aromáticos, de origen natural o sintético, que se utilizan para dar olor agradable a los productos cosméticos o directamente para perfumar la piel.',
+        subtypes: null,
+        examples: 'Mezclas complejas de aceites esenciales aromáticos naturales o sintéticos.'
+      },
+      {
+        id: 'colorantes',
+        category: 'hidratacion',
+        catLabel: 'Hidratación y Sensorialidad',
+        fcDeck: 'Hidratación y Color',
+        icon: '🎨',
+        title: 'Colorantes y Pigmentos',
+        shortDesc: 'Colorean el producto, la piel o sus apéndices.',
+        fullFunction: 'Utilizados para colorear los propios productos cosméticos y/o dar color a la piel y/o sus apéndices (cabello, uñas). En los tintes del cabello se utilizan precursores de color (colorantes de oxidación).',
+        subtypes: [
+          '<strong>Colorantes directos:</strong> FD&C Blue No. 1, CI 42090.',
+          '<strong>Precursores de color (tintes de oxidación):</strong> p-fenilendiamina, diaminofenoles.'
+        ],
+        examples: 'Colorantes: FD&C Blue No. 1, CI 42090. Precursores de color: p-fenilendiamina, diaminofenoles.'
+      },
+
+      // --- TRATAMIENTOS CAPILARES ---
+      {
+        id: 'oxidantes',
+        category: 'capilar',
+        catLabel: 'Tratamientos Capilares',
+        fcDeck: 'Tratamientos Capilares',
+        icon: '⚗️',
+        title: 'Oxidantes',
+        shortDesc: 'Permiten la penetración del colorante en el tinte.',
+        fullFunction: 'Ingredientes específicos en tratamientos del cabello que se utilizan para permitir la penetración y desarrollo de los colorantes en el interior del cabello durante el proceso de tinte.',
+        subtypes: null,
+        examples: 'Agua oxigenada (peróxido de hidrógeno).'
+      },
+      {
+        id: 'reductores',
+        category: 'capilar',
+        catLabel: 'Tratamientos Capilares',
+        fcDeck: 'Tratamientos Capilares',
+        icon: '〰️',
+        title: 'Reductores',
+        shortDesc: 'Modifican la forma del cabello (rizado y desrizado).',
+        fullFunction: 'Ingredientes específicos utilizados en los tratamientos de cambio de forma permanente del cabello (tanto para rizado como para desrizado).',
+        subtypes: null,
+        examples: 'Ácido tioglicólico.'
+      },
+      {
+        id: 'decolorantes',
+        category: 'capilar',
+        catLabel: 'Tratamientos Capilares',
+        fcDeck: 'Tratamientos Capilares',
+        icon: '⚡',
+        title: 'Decolorantes',
+        shortDesc: 'Eliminan los pigmentos de color del cabello.',
+        fullFunction: 'Ingredientes específicos en tratamientos capilares empleados para la eliminación o aclarado intenso del color natural o artificial del cabello.',
+        subtypes: null,
+        examples: 'Persulfatos.'
+      },
+      {
+        id: 'alcalinos',
+        category: 'capilar',
+        catLabel: 'Tratamientos Capilares',
+        fcDeck: 'Tratamientos Capilares',
+        icon: '📈',
+        title: 'Agentes Alcalinos',
+        shortDesc: 'Aumentan el pH en los tintes de oxidación.',
+        fullFunction: 'Se utilizan para aumentar el valor del pH (alcalinizar el medio) en los tintes de oxidación, facilitando la apertura de la cutícula capilar.',
+        subtypes: null,
+        examples: 'Amoniaco, aminas.'
+      },
+
+      // --- PROTECCIÓN, CONSERVACIÓN Y ADITIVOS ---
+      {
+        id: 'filtros',
+        category: 'proteccion',
+        catLabel: 'Protección, Conservación y Aditivos',
+        fcDeck: 'Protección y Correctores',
+        icon: '☀️',
+        title: 'Filtros Solares',
+        shortDesc: 'Protegen piel/cabello de la radiación y evitan decoloración.',
+        fullFunction: 'Filtran la radiación solar evitando daños en la piel o el cabello (fotoenvejecimiento, quemaduras, daño capilar). Además, dentro de la fórmula cosmética actúan como aditivos evitando la decoloración del producto.',
+        subtypes: null,
+        examples: 'Óxidos de titanio o zinc (filtros físicos/minerales), benzofenonas.'
+      },
+      {
+        id: 'conservantes',
+        category: 'proteccion',
+        catLabel: 'Protección, Conservación y Aditivos',
+        fcDeck: 'Protección y Correctores',
+        icon: '🦠',
+        title: 'Conservantes',
+        shortDesc: 'Evitan la contaminación por bacterias u hongos.',
+        fullFunction: 'Preservan los productos cosméticos de la contaminación y proliferación de microorganismos (bacterias u hongos), garantizando su seguridad y vida útil.',
+        subtypes: null,
+        examples: 'Parabenos, antimicrobianos, metilisotiazolinona, ácido salicílico.'
+      },
+      {
+        id: 'correctores',
+        category: 'proteccion',
+        catLabel: 'Protección, Conservación y Aditivos',
+        fcDeck: 'Protección y Correctores',
+        icon: '⚖️',
+        title: 'Correctores de las Fórmulas / Aditivos',
+        shortDesc: 'Ajustan pH, evitan oxidación de grasas y bloquean impurezas.',
+        fullFunction: 'Se utilizan para corregir ciertos valores o características de las fórmulas de los productos cosméticos o evitar su deterioro por efecto de alguna impureza o de la radiación solar.',
+        subtypes: [
+          '<strong>Correctores del pH (álcalis o ácidos):</strong> Ácido cítrico, trietanolamina.',
+          '<strong>Antioxidantes:</strong> Evitan la oxidación de ciertos ingredientes, sobre todo de las grasas (BHA, BHT, ácido ascórbico / vitamina C).',
+          '<strong>Secuestrantes o quelantes:</strong> Bloquean ciertos tipos de sustancias (iones metálicos) que podrían ser perjudiciales para la estabilidad de las fórmulas (EDTA).',
+          '<strong>Filtros solares:</strong> Evitan la decoloración del propio producto.'
+        ],
+        examples: 'pH: ácido cítrico, trietanolamina. Antioxidantes: BHA, BHT, ácido ascórbico (vitamina C). Secuestrantes/Quelantes: EDTA.'
+      },
+
+      // --- APLICACIONES ESPECIALES (ACTIVOS) ---
+      {
+        id: 'activos',
+        category: 'activos',
+        catLabel: 'Aplicaciones Especiales (Activos)',
+        fcDeck: 'Activos',
+        icon: '🌿',
+        title: 'Ingredientes Activos (Aplicaciones Especiales)',
+        shortDesc: 'Tratan problemas específicos: arrugas, caspa, hidratación, radicales libres.',
+        fullFunction: 'Se utilizan en los productos cosméticos como sustancias activas destinadas a diferentes usos o problemas específicos de la piel o el cabello: mejorar el aspecto, suavizar arrugas, acción anti-radicales libres, hidratación profunda, acción anticaspa, reparación capilar, etc.',
+        subtypes: [
+          '<strong>Capilares y anticaspa:</strong> Queratina, piritionato de zinc (anticaspa), pantenol.',
+          '<strong>Antiedad y renovación:</strong> Retinol, ácido glicólico, colágeno, vitaminas.',
+          '<strong>Hidratación y nutrición:</strong> Ácido hialurónico, aceites vegetales (argán, oliva, almendras), extractos vegetales (aloe vera, extracto de manzanilla).'
+        ],
+        examples: 'Queratina, aceites vegetales (argán, oliva, almendras), piritionato de zinc, retinol, ácido glicólico, pantenol, ácido hialurónico, colágeno, vitaminas, extractos vegetales (aloe vera, manzanilla).'
+      }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 2. PREGUNTAS DEL TEST DE AUTOEVALUACIÓN (12 PREGUNTAS DEL TEMARIO)
+    // -------------------------------------------------------------------------
+    const QUIZ_QUESTIONS = [
+      {
+        q: "¿Qué tipo de tensioactivos poseen propiedades suavizantes y anti-encrespamiento para el cabello?",
+        options: ["Tensioactivos aniónicos", "Tensioactivos catiónicos (sales de amonio cuaternario)", "Tensioactivos no iónicos", "Persulfatos"],
+        correct: 1,
+        explanation: "Los tensioactivos catiónicos (como las sales de amonio cuaternario) tienen carga positiva y aportan propiedades suavizantes y anti-encrespamiento al cabello."
+      },
+      {
+        q: "¿Cuál es la función principal de los humectantes en un cosmético?",
+        options: ["Eliminar el color del cabello", "Atraer y absorber el agua reteniendo la humedad de la piel o el cabello", "Evitar la contaminación por hongos", "Aumentar el pH en los tintes"],
+        correct: 1,
+        explanation: "Los humectantes (como la glicerina, el propilenglicol o el sorbitol) atraen y retienen agua para mantener hidratada la piel o el cabello."
+      },
+      {
+        q: "¿Cuál de los siguientes grupos corresponde exclusivamente a ejemplos de humectantes del temario?",
+        options: ["Lanolina y miristato de isopropilo", "Glicerina, propilenglicol y sorbitol", "BHA, BHT y EDTA", "Amoniaco y aminas"],
+        correct: 1,
+        explanation: "Glicerina (glicerol), propilenglicol y sorbitol son los tres ejemplos clásicos de humectantes recogidos en el temario."
+      },
+      {
+        q: "¿Para qué se utilizan los agentes reductores como el ácido tioglicólico en peluquería?",
+        options: ["Para realizar cambios de forma del cabello (rizado y desrizado)", "Para estabilizar la espuma del champú", "Para filtrar la radiación solar", "Para decolorar el cabello"],
+        correct: 0,
+        explanation: "Los reductores (como el ácido tioglicólico) actúan en los tratamientos de cambio de forma permanente del cabello (rizado y desrizado)."
+      },
+      {
+        q: "¿Qué ingrediente se emplea como oxidante para permitir la penetración de los colorantes en el cabello durante el tinte?",
+        options: ["Persulfatos", "Agua oxigenada", "Ácido cítrico", "Trietanolamina"],
+        correct: 1,
+        explanation: "El agua oxigenada es el oxidante utilizado para permitir la penetración y oxidación de los colorantes en el cabello."
+      },
+      {
+        q: "¿Qué sustancia se incluye dentro de los ingredientes activos por su acción específica anticaspa?",
+        options: ["Piritionato de zinc", "Miristato de isopropilo", "Lauril sulfato de sodio", "Benzofenonas"],
+        correct: 0,
+        explanation: "El piritionato de zinc es un ingrediente activo específico utilizado en productos capilares por su eficacia anticaspa."
+      },
+      {
+        q: "¿Cuál es la función de los secuestrantes o quelantes (como el EDTA) en una fórmula cosmética?",
+        options: ["Dar olor agradable al producto", "Bloquear ciertas sustancias que podrían ser perjudiciales para la estabilidad de las fórmulas", "Incrementar el volumen de la espuma", "Suavizar y afinar la piel"],
+        correct: 1,
+        explanation: "Los secuestrantes o quelantes (como el EDTA) bloquean sustancias (como iones metálicos) que perjudicarían la estabilidad del cosmético."
+      },
+      {
+        q: "¿Qué función desempeñan los antioxidantes como el BHA, BHT o el ácido ascórbico (vitamina C) en la fórmula?",
+        options: ["Evitan la oxidación de ciertos ingredientes, sobre todo de las grasas", "Aumentan el valor del pH en tintes", "Suspenden sólidos insolubles", "Colorean el cosmético"],
+        correct: 0,
+        explanation: "Los antioxidantes (BHA, BHT, ácido ascórbico) evitan el enranciamiento u oxidación de los componentes grasos de la fórmula."
+      },
+      {
+        q: "¿Qué son la p-fenilendiamina y los diaminofenoles?",
+        options: ["Conservantes antimicrobianos", "Precursores de color utilizados en tintes de oxidación", "Espesantes derivados de la celulosa", "Filtros solares físicos"],
+        correct: 1,
+        explanation: "La p-fenilendiamina y los diaminofenoles son precursores de color empleados en los tintes capilares de oxidación."
+      },
+      {
+        q: "¿Qué ingredientes se añaden a champús y geles para incrementar la espuma y darle un tacto cremoso?",
+        options: ["Estabilizadores de la espuma (dietanolamidas, betaínas)", "Decolorantes (persulfatos)", "Emolientes (lanolina)", "Correctores del pH (ácido cítrico)"],
+        correct: 0,
+        explanation: "Los estabilizadores de la espuma (como dietanolamidas y betaínas) incrementan el volumen, duración y tacto cremoso de la espuma."
+      },
+      {
+        q: "¿Para qué sirven los agentes alcalinos (amoniaco, aminas) en los tintes de oxidación?",
+        options: ["Para bajar el pH y cerrar la cutícula", "Para aumentar el valor del pH en los tintes de oxidación", "Para evitar la contaminación bacteriana", "Para absorber humedad ambiental"],
+        correct: 1,
+        explanation: "Los agentes alcalinos como el amoniaco y las aminas aumentan el valor del pH en los tintes de oxidación."
+      },
+      {
+        q: "¿Qué sucede cuando los radicales libres atacan a una célula sana según el esquema del temario?",
+        options: ["Se produce estrés oxidativo (destrucción celular)", "Se genera espuma cremosa", "Se purifica el agua de la fórmula", "Se estabiliza la fase acuosa"],
+        correct: 0,
+        explanation: "El ataque de los radicales libres sobre la célula sana desencadena el estrés oxidativo y la consiguiente destrucción celular."
+      }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 3. CASOS PRÁCTICOS: EL LABORATORIO COSMÉTICO (5 RETOS DE SALÓN)
+    // -------------------------------------------------------------------------
+    const LAB_CHALLENGES = [
+      {
+        title: "Reto 1: Cambio de forma en el salón",
+        scenario: "Vas a realizar una permanente para rizar el cabello de una clienta. Necesitas un ingrediente específico capaz de actuar sobre la estructura interna del cabello para permitir el cambio de forma (rizado o desrizado).",
+        question: "¿Qué tipo de sustancia y ejemplo debes seleccionar?",
+        options: [
+          { text: "Un reductor: Ácido tioglicólico", correct: true, feedback: "¡Exacto! El ácido tioglicólico es el agente reductor empleado en los tratamientos de rizado y desrizado." },
+          { text: "Un decolorante: Persulfatos", correct: false, feedback: "Incorrecto. Los persulfatos son decolorantes usados para eliminar el color, no para cambiar la forma." },
+          { text: "Un emoliente: Lanolina", correct: false, feedback: "Incorrecto. La lanolina suaviza la piel, pero no modifica la forma del cabello." }
+        ]
+      },
+      {
+        title: "Reto 2: Formulación de un champú profesional",
+        scenario: "Estás evaluando la fórmula de un nuevo champú. Notas que hace muy poca espuma, no tiene tacto cremoso y además su consistencia es excesivamente líquida.",
+        question: "¿Qué dos familias de ingredientes necesitas incorporar para solucionar ambos problemas?",
+        options: [
+          { text: "Estabilizadores de la espuma (dietanolamidas) + Espesantes (goma xantana)", correct: true, feedback: "¡Brillante! Los estabilizadores mejoran volumen y cremosidad de la espuma, y los espesantes regulan la consistencia." },
+          { text: "Agentes alcalinos (amoniaco) + Oxidantes (agua oxigenada)", correct: false, feedback: "Incorrecto. Esos ingredientes son para tintes de oxidación, no para dar consistencia o espuma a un champú." },
+          { text: "Conservantes (parabenos) + Filtros solares (benzofenonas)", correct: false, feedback: "Incorrecto. Protegen contra microorganismos y radiación UV, pero no espesan ni generan espuma." }
+        ]
+      },
+      {
+        title: "Reto 3: Tratamiento capilar específico",
+        scenario: "Acude al salón un cliente con descamación visible en el cuero cabelludo (caspa) y solicita un champú tratante específico para resolver este problema.",
+        question: "¿Qué ingrediente activo específico del temario elegirías en la formulación?",
+        options: [
+          { text: "Piritionato de zinc", correct: true, feedback: "¡Correcto! El piritionato de zinc es el activo específico indicado en el temario para tratamientos anticaspa." },
+          { text: "Miristato de isopropilo", correct: false, feedback: "Incorrecto. Es un emoliente para suavizar la piel, no un activo anticaspa." },
+          { text: "CI 42090 (FD&C Blue No. 1)", correct: false, feedback: "Incorrecto. Es un colorante utilizado para dar color al cosmético." }
+        ]
+      },
+      {
+        title: "Reto 4: Servicio de coloración por oxidación",
+        scenario: "Vas a aplicar un tinte de oxidación. Para que el proceso funcione correctamente, necesitas elevar el pH del medio y lograr que los precursores de color penetren en el tallo capilar.",
+        question: "¿Qué combinación de ingredientes intervienen en este proceso?",
+        options: [
+          { text: "Agentes alcalinos (amoniaco/aminas) + Oxidantes (agua oxigenada)", correct: true, feedback: "¡Perfecto! El agente alcalino sube el pH y el agua oxigenada permite la penetración y oxidación del color." },
+          { text: "Secuestrantes (EDTA) + Humectantes (sorbitol)", correct: false, feedback: "Incorrecto. El EDTA bloquea impurezas y el sorbitol retiene humedad." },
+          { text: "Correctores ácidos (ácido cítrico) + Espesantes (celulosa)", correct: false, feedback: "Incorrecto. El ácido cítrico bajaría el pH en lugar de aumentarlo." }
+        ]
+      },
+      {
+        title: "Reto 5: Estabilidad de una crema hidratante",
+        scenario: "En el laboratorio observas que una crema compuesta por fase acuosa y fase grasa tiende a separarse en dos capas, y además las grasas corren riesgo de oxidarse con el tiempo.",
+        question: "¿Qué ingredientes resuelven la unión de fases y evitan la oxidación de las grasas?",
+        options: [
+          { text: "Tensioactivos/emulsionantes (y espesantes) + Antioxidantes (BHA, BHT, vitamina C)", correct: true, feedback: "¡Excelente! Los emulsionantes unen agua y grasa (apoyados por espesantes) y los antioxidantes protegen las grasas de la oxidación." },
+          { text: "Decolorantes (persulfatos) + Perfumes (aceites esenciales)", correct: false, feedback: "Incorrecto. Ninguno de esos ingredientes une fases ni evita la oxidación lipídica." },
+          { text: "Reductores (ácido tioglicólico) + Colorantes", correct: false, feedback: "Incorrecto. Esos componentes no estabilizan emulsiones ni evitan el enranciamiento." }
+        ]
+      }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 4. ACTIVIDAD 3: CLASIFICA EL INGREDIENTE (EMPAREJAMIENTO RÁPIDO)
+    // -------------------------------------------------------------------------
+    const MATCH_ITEMS = [
+      { id: 'm1', substance: 'Ácido tioglicólico', family: 'Reductor (cambio de forma)' },
+      { id: 'm2', substance: 'EDTA', family: 'Secuestrante / Quelante' },
+      { id: 'm3', substance: 'Glicerina (glicerol)', family: 'Humectante' },
+      { id: 'm4', substance: 'Persulfatos', family: 'Decolorante' },
+      { id: 'm5', substance: 'Betaínas', family: 'Tensioactivo anfótero / Estab. espuma' },
+      { id: 'm6', substance: 'Piritionato de zinc', family: 'Activo anticaspa' },
+      { id: 'm7', substance: 'Óxido de titanio o zinc', family: 'Filtro solar' },
+      { id: 'm8', substance: 'Parabenos y metilisotiazolinona', family: 'Conservante' },
+      { id: 'm9', substance: 'Lanolina y miristato de isopropilo', family: 'Emoliente' },
+      { id: 'm10', substance: 'Agua oxigenada', family: 'Oxidante' }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 5. ESTADO GLOBAL Y PERSISTENCIA EN LOCALSTORAGE
+    // -------------------------------------------------------------------------
+    let state = {
+      currentSlide: 0,
+      points: 0,
+      readTopics: [],
+      masteredCards: [],
+      bestQuizScore: null,
+      labCompleted: false,
+      matchCompleted: false
+    };
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem('cosmetica_genially_state_v1');
+        if (saved) {
+          state = { ...state, ...JSON.parse(saved) };
+        }
+      } catch (e) {
+        console.warn('No se pudo leer localStorage:', e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('cosmetica_genially_state_v1', JSON.stringify(state));
+      } catch (e) {
+        console.warn('No se pudo guardar en localStorage:', e);
+      }
+      updateDashboardUI();
+    }
+
+    function addPoints(amount, reason) {
+      state.points += amount;
+      saveState();
+      showToast(`+${amount} pts · ${reason}`, '⭐');
+    }
+
+    function showToast(msg, icon = '✨') {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2800);
+    }
+
+    function updateDashboardUI() {
+      document.getElementById('header-points').textContent = `${state.points} pts`;
+      document.getElementById('dash-points').textContent = state.points;
+      document.getElementById('dash-cards').textContent = `${state.masteredCards.length} / ${INGREDIENTS_DATA.length}`;
+      document.getElementById('dash-topics').textContent = `${state.readTopics.length} / ${INGREDIENTS_DATA.length}`;
+      document.getElementById('topics-counter-badge').textContent = `${state.readTopics.length}/${INGREDIENTS_DATA.length}`;
+      
+      if (state.bestQuizScore !== null) {
+        document.getElementById('dash-quiz').textContent = `${state.bestQuizScore} / 10`;
+      } else {
+        document.getElementById('dash-quiz').textContent = `- / 10`;
+      }
+
+      // Barra de dominio en Flashcards
+      const pct = Math.round((state.masteredCards.length / INGREDIENTS_DATA.length) * 100);
+      document.getElementById('flashcard-mastery-text').textContent = `${state.masteredCards.length} / ${INGREDIENTS_DATA.length}`;
+      document.getElementById('flashcard-mastery-bar').style.width = `${pct}%`;
+    }
+
+    // -------------------------------------------------------------------------
+    // 6. NAVEGACIÓN ENTRE DIAPOSITIVAS (PRESENTACIÓN INTERACTIVA)
+    // -------------------------------------------------------------------------
+    function goToSlide(index) {
+      state.currentSlide = index;
+      const slides = document.querySelectorAll('.slide-section');
+      slides.forEach((s, idx) => {
+        if (idx === index) {
+          s.classList.remove('hidden');
+          s.classList.remove('slide-enter');
+          void s.offsetWidth; // Reiniciar animación CSS
+          s.classList.add('slide-enter');
+        } else {
+          s.classList.add('hidden');
+        }
+      });
+
+      // Actualizar pestañas superiores
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`nav-btn-${i}`);
+        if (i === index) {
+          btn.className = 'nav-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-lavender-600 shadow-sm transition-all whitespace-nowrap';
+        } else {
+          btn.className = 'nav-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-navy transition-all whitespace-nowrap';
+        }
+      }
+
+      // Actualizar indicadores inferiores y barra de progreso
+      const progressPct = ((index + 1) / 4) * 100;
+      document.getElementById('global-progress-bar').style.width = `${progressPct}%`;
+      document.getElementById('slide-indicator').textContent = `${index + 1} / 4`;
+
+      document.getElementById('btn-prev-slide').disabled = index === 0;
+      document.getElementById('btn-next-slide').disabled = index === 3;
+
+      const dots = document.querySelectorAll('.dot-indicator');
+      dots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.className = 'dot-indicator w-6 h-2.5 rounded-full bg-lavender-600 transition-all';
+        } else {
+          dot.className = 'dot-indicator w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all';
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextSlide() {
+      if (state.currentSlide < 3) goToSlide(state.currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (state.currentSlide > 0) goToSlide(state.currentSlide - 1);
+    }
+
+    // -------------------------------------------------------------------------
+    // 7. TEMARIO INTERACTIVO Y MODALES TIPO GENIALLY
+    // -------------------------------------------------------------------------
+    let activeCategoryFilter = 'all';
+
+    function renderCategoryFilters() {
+      const container = document.getElementById('category-filters');
+      container.innerHTML = CATEGORIES.map(cat => {
+        const isActive = activeCategoryFilter === cat.id;
+        return `
+          <button onclick="filterTopics('${cat.id}')" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition-all flex items-center gap-1.5 ${isActive ? 'bg-navy text-white border-navy shadow-md' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'}">
+            <span>${cat.icon}</span>
+            <span>${cat.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function filterTopics(catId) {
+      activeCategoryFilter = catId;
+      renderCategoryFilters();
+      renderTopicsGrid();
+    }
+
+    function renderTopicsGrid() {
+      const grid = document.getElementById('topics-grid');
+      const filtered = activeCategoryFilter === 'all'
+        ? INGREDIENTS_DATA
+        : INGREDIENTS_DATA.filter(item => item.category === activeCategoryFilter);
+
+      grid.innerHTML = filtered.map(item => {
+        const isRead = state.readTopics.includes(item.id);
+        const catObj = CATEGORIES.find(c => c.id === item.category);
+        return `
+          <div onclick="openTopicModal('${item.id}')" class="group bg-white/95 hover:bg-white rounded-3xl p-5 border-2 ${isRead ? 'border-mint-200' : 'border-slate-100 hover:border-lavender-300'} shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded-lg text-[11px] font-bold border ${catObj.color}">
+                  ${item.catLabel}
+                </span>
+                ${isRead
+                  ? '<span class="text-xs font-bold text-mint-600 bg-mint-50 px-2 py-0.5 rounded-full">✓ Leída</span>'
+                  : '<span class="w-2.5 h-2.5 rounded-full bg-lavender-500 genially-hotspot" title="Haz clic para explorar"></span>'
+                }
+              </div>
+
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-12 h-12 rounded-2xl bg-slate-50 group-hover:bg-lavender-50 flex items-center justify-center text-2xl transition-colors">
+                  ${item.icon}
+                </div>
+                <h3 class="font-display font-bold text-lg text-navy group-hover:text-lavender-600 transition-colors leading-snug">
+                  ${item.title}
+                </h3>
+              </div>
+
+              <p class="text-sm text-slate-600 leading-relaxed mt-2">
+                ${item.shortDesc}
+              </p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-lavender-600">
+              <span>Ver ficha y ejemplos</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openTopicModal(id) {
+      const item = INGREDIENTS_DATA.find(i => i.id === id);
+      if (!item) return;
+
+      // Registrar lectura y dar puntos la primera vez
+      if (!state.readTopics.includes(id)) {
+        state.readTopics.push(id);
+        addPoints(5, `Ficha explorada: ${item.title}`);
+        renderTopicsGrid();
+      }
+
+      const catObj = CATEGORIES.find(c => c.id === item.category);
+      const badge = document.getElementById('modal-category-badge');
+      badge.textContent = item.catLabel;
+      badge.className = `inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 border ${catObj.color}`;
+
+      document.getElementById('modal-icon').textContent = item.icon;
+      document.getElementById('modal-title').textContent = item.title;
+      document.getElementById('modal-function').textContent = item.fullFunction;
+      document.getElementById('modal-examples').textContent = item.examples;
+
+      const subtypesBox = document.getElementById('modal-subtypes-box');
+      const subtypesList = document.getElementById('modal-subtypes');
+      if (item.subtypes && item.subtypes.length > 0) {
+        subtypesBox.classList.remove('hidden');
+        subtypesList.innerHTML = item.subtypes.map(s => `<p class="leading-relaxed">• ${s}</p>`).join('');
+      } else {
+        subtypesBox.classList.add('hidden');
+      }
+
+      const modal = document.getElementById('topic-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeTopicModal() {
+      const modal = document.getElementById('topic-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Esquema interactivo de Radicales Libres
+    function selectRadicalStep(step) {
+      const infoBox = document.getElementById('radical-info-box');
+      const btns = [1, 2, 3].map(n => document.getElementById(`rad-step-${n}`));
+      
+      btns.forEach((b, idx) => {
+        b.classList.remove('ring-2', 'ring-mint-500', 'ring-amber-500', 'ring-coral-500');
+        if (idx + 1 === step) {
+          const ringColor = step === 1 ? 'ring-mint-500' : (step === 2 ? 'ring-amber-500' : 'ring-coral-500');
+          b.classList.add('ring-2', ringColor);
+        }
+      });
+
+      if (step === 1) {
+        infoBox.innerHTML = `<strong class="text-mint-600 block mb-1">1. Célula Sana:</strong> Estructura celular equilibrada y protegida. Mantiene sus funciones vitales intactas en la piel y el cabello.`;
+      } else if (step === 2) {
+        infoBox.innerHTML = `<strong class="text-amber-600 block mb-1">2. Célula atacada por radicales libres:</strong> Moléculas inestables (generadas por radiación solar, polución, etc.) atacan las membranas y estructuras de la célula sana.`;
+      } else {
+        infoBox.innerHTML = `<strong class="text-coral-600 block mb-1">3. Estrés oxidativo (destrucción celular):</strong> Se produce el deterioro y envejecimiento prematuro de los tejidos. Aquí actúan los <strong>activos anti-radicales libres</strong> y los <strong>antioxidantes</strong> (vitamina C, BHA, BHT) para frenarlo.`;
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 8. FLASHCARDS INTERACTIVAS (3D FLIP)
+    // -------------------------------------------------------------------------
+    const FC_DECKS = ['Todas', 'Base y Espuma', 'Hidratación y Color', 'Tratamientos Capilares', 'Protección y Correctores', 'Activos'];
+    let currentDeckFilter = 'Todas';
+    let currentDeck = [...INGREDIENTS_DATA];
+    let currentCardIndex = 0;
+    let isCardFlipped = false;
+
+    function renderFlashcardFilters() {
+      const container = document.getElementById('flashcard-filters');
+      container.innerHTML = FC_DECKS.map(deck => {
+        const active = currentDeckFilter === deck;
+        return `
+          <button onclick="setFlashcardDeck('${deck}')" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition-all ${active ? 'bg-coral-500 text-white border-coral-500 shadow-sm' : 'bg-white text-slate-600 border-slate-200 hover:bg-coral-50'}">
+            ${deck}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setFlashcardDeck(deckName) {
+      currentDeckFilter = deckName;
+      currentDeck = deckName === 'Todas'
+        ? [...INGREDIENTS_DATA]
+        : INGREDIENTS_DATA.filter(i => i.fcDeck === deckName);
+      currentCardIndex = 0;
+      isCardFlipped = false;
+      renderFlashcardFilters();
+      updateFlashcardView();
+    }
+
+    function updateFlashcardView() {
+      if (currentDeck.length === 0) return;
+      const card = currentDeck[currentCardIndex];
+      const inner = document.getElementById('flashcard-inner');
+
+      if (isCardFlipped) {
+        inner.classList.add('rotate-y-180');
+      } else {
+        inner.classList.remove('rotate-y-180');
+      }
+
+      document.getElementById('fc-counter').textContent = `Tarjeta ${currentCardIndex + 1} de ${currentDeck.length}`;
+      
+      const isMastered = state.masteredCards.includes(card.id);
+      const statusBadge = document.getElementById('fc-status-badge');
+      if (isMastered) {
+        statusBadge.textContent = '✅ Dominada';
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full bg-mint-100 text-mint-700 font-bold';
+      } else {
+        statusBadge.textContent = '⏳ En estudio';
+        statusBadge.className = 'px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-700 font-bold';
+      }
+
+      // Cara A
+      document.getElementById('fc-category-tag').textContent = card.fcDeck;
+      document.getElementById('fc-icon').textContent = card.icon;
+      document.getElementById('fc-front-title').textContent = card.title;
+
+      // Cara B
+      document.getElementById('fc-back-title').textContent = card.title;
+      document.getElementById('fc-back-desc').textContent = card.fullFunction;
+      document.getElementById('fc-back-examples').textContent = card.examples;
+    }
+
+    function flipFlashcard() {
+      isCardFlipped = !isCardFlipped;
+      updateFlashcardView();
+    }
+
+    function nextFlashcard() {
+      isCardFlipped = false;
+      currentCardIndex = (currentCardIndex + 1) % currentDeck.length;
+      updateFlashcardView();
+    }
+
+    function prevFlashcard() {
+      isCardFlipped = false;
+      currentCardIndex = (currentCardIndex - 1 + currentDeck.length) % currentDeck.length;
+      updateFlashcardView();
+    }
+
+    function shuffleFlashcards() {
+      isCardFlipped = false;
+      for (let i = currentDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+      }
+      currentCardIndex = 0;
+      updateFlashcardView();
+      showToast('Baraja mezclada aleatoriamente', '🔀');
+    }
+
+    function markFlashcard(known) {
+      const card = currentDeck[currentCardIndex];
+      if (known) {
+        if (!state.masteredCards.includes(card.id)) {
+          state.masteredCards.push(card.id);
+          addPoints(5, `Tarjeta dominada: ${card.title}`);
+        } else {
+          showToast('¡Ya tenías esta tarjeta dominada!', '✅');
+        }
+      } else {
+        state.masteredCards = state.masteredCards.filter(id => id !== card.id);
+        saveState();
+        showToast('Marcada para repasar más tarde', '🔁');
+      }
+      nextFlashcard();
+    }
+
+    // -------------------------------------------------------------------------
+    // 9. ACTIVIDADES INTERACTIVAS DE REPASO
+    // -------------------------------------------------------------------------
+    function switchActivity(actName) {
+      ['quiz', 'lab', 'match'].forEach(name => {
+        const panel = document.getElementById(`activity-${name}`);
+        const tab = document.getElementById(`act-tab-${name}`);
+        if (name === actName) {
+          panel.classList.remove('hidden');
+          tab.className = 'act-tab p-4 rounded-2xl border-2 border-lavender-500 bg-lavender-50 text-navy text-left transition-all flex items-start gap-3 shadow-sm';
+        } else {
+          panel.classList.add('hidden');
+          tab.className = 'act-tab p-4 rounded-2xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition-all flex items-start gap-3';
+        }
+      });
+    }
+
+    // --- ACTIVIDAD 1: TEST DE AUTOEVALUACIÓN (12 PREGUNTAS) ---
+    let quizIdx = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      if (quizIdx >= QUIZ_QUESTIONS.length) {
+        const grade10 = ((quizScore / QUIZ_QUESTIONS.length) * 10).toFixed(1);
+        const passed = parseFloat(grade10) >= 5;
+        if (state.bestQuizScore === null || parseFloat(grade10) > parseFloat(state.bestQuizScore)) {
+          state.bestQuizScore = grade10;
+          saveState();
+        }
+        if (parseFloat(grade10) >= 7) {
+          launchConfetti();
+        }
+
+        container.innerHTML = `
+          <div class="text-center max-w-lg mx-auto py-6 space-y-5">
+            <div class="text-6xl">${passed ? '🎉' : '📚'}</div>
+            <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-navy">
+              ${passed ? '¡Test Completado!' : '¡Sigue repasando!'}
+            </h3>
+            <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block">Calificación Final</span>
+              <span class="font-display font-extrabold text-5xl ${passed ? 'text-mint-600' : 'text-coral-500'} my-2 block">
+                ${grade10} <span class="text-2xl text-slate-400">/ 10</span>
+              </span>
+              <p class="text-sm text-slate-600">Has acertado <strong>${quizScore}</strong> de <strong>${QUIZ_QUESTIONS.length}</strong> preguntas.</p>
+            </div>
+            <button onclick="restartQuiz()" class="px-6 py-3 rounded-2xl bg-lavender-600 hover:bg-lavender-500 text-white font-bold text-sm shadow-lg transition-all">
+              🔄 Repetir Test
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const q = QUIZ_QUESTIONS[quizIdx];
+      quizAnswered = false;
+
+      container.innerHTML = `
+        <div class="max-w-2xl mx-auto">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-4">
+            <span>Pregunta ${quizIdx + 1} de ${QUIZ_QUESTIONS.length}</span>
+            <span class="bg-lavender-100 text-lavender-700 px-3 py-1 rounded-full">Aciertos: ${quizScore}</span>
+          </div>
+
+          <div class="w-full bg-slate-100 h-2 rounded-full mb-6 overflow-hidden">
+            <div class="bg-lavender-500 h-full transition-all duration-300" style="width: ${((quizIdx) / QUIZ_QUESTIONS.length) * 100}%"></div>
+          </div>
+
+          <h3 class="font-display font-bold text-lg sm:text-xl text-navy mb-5 leading-snug">
+            ${q.q}
+          </h3>
+
+          <div id="quiz-options" class="space-y-3">
+            ${q.options.map((opt, idx) => `
+              <button onclick="answerQuiz(${idx})" id="q-opt-${idx}" class="w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-lavender-400 hover:bg-lavender-50/40 font-medium text-sm sm:text-base text-navy transition-all flex items-center gap-3">
+                <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center shrink-0">
+                  ${String.fromCharCode(65 + idx)}
+                </span>
+                <span>${opt}</span>
+              </button>
+            `).join('')}
+          </div>
+
+          <div id="quiz-feedback" class="hidden mt-5 p-4 rounded-2xl text-sm leading-relaxed"></div>
+
+          <div id="quiz-next-wrap" class="hidden mt-5 flex justify-end">
+            <button onclick="nextQuizQuestion()" class="px-6 py-3 rounded-2xl bg-navy hover:bg-slate-800 text-white font-bold text-sm transition-all">
+              ${quizIdx === QUIZ_QUESTIONS.length - 1 ? 'Ver Nota Final 🏆' : 'Siguiente Pregunta →'}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function answerQuiz(selectedIdx) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const q = QUIZ_QUESTIONS[quizIdx];
+      const isCorrect = selectedIdx === q.correct;
+      if (isCorrect) {
+        quizScore++;
+        addPoints(10, 'Respuesta correcta en el Test');
+      }
+
+      q.options.forEach((_, idx) => {
+        const btn = document.getElementById(`q-opt-${idx}`);
+        btn.disabled = true;
+        if (idx === q.correct) {
+          btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-mint-500 bg-mint-50 font-semibold text-sm sm:text-base text-mint-900 flex items-center gap-3';
+        } else if (idx === selectedIdx && !isCorrect) {
+          btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-coral-500 bg-coral-50 font-medium text-sm sm:text-base text-coral-900 flex items-center gap-3';
+        } else {
+          btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-slate-100 bg-slate-50/50 text-slate-400 text-sm sm:text-base flex items-center gap-3';
+        }
+      });
+
+      const fb = document.getElementById('quiz-feedback');
+      fb.classList.remove('hidden');
+      fb.className = `mt-5 p-4 rounded-2xl text-sm leading-relaxed border ${isCorrect ? 'bg-mint-50 border-mint-200 text-mint-900' : 'bg-coral-50 border-coral-200 text-coral-900'}`;
+      fb.innerHTML = `<strong>${isCorrect ? '✅ ¡Correcto!' : '❌ Incorrecto:'}</strong> ${q.explanation}`;
+
+      document.getElementById('quiz-next-wrap').classList.remove('hidden');
+    }
+
+    function nextQuizQuestion() {
+      quizIdx++;
+      renderQuiz();
+    }
+
+    function restartQuiz() {
+      quizIdx = 0;
+      quizScore = 0;
+      renderQuiz();
+    }
+
+    // --- ACTIVIDAD 2: EL LABORATORIO COSMÉTICO (5 CASOS PRÁCTICOS) ---
+    let labIdx = 0;
+    let labScore = 0;
+    let labAnswered = false;
+
+    function renderLab() {
+      const container = document.getElementById('lab-container');
+      if (labIdx >= LAB_CHALLENGES.length) {
+        if (!state.labCompleted && labScore >= 4) {
+          state.labCompleted = true;
+          addPoints(25, '¡Laboratorio Cosmético superado!');
+          launchConfetti();
+        }
+        container.innerHTML = `
+          <div class="text-center max-w-lg mx-auto py-6 space-y-5">
+            <div class="text-6xl">🧪</div>
+            <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-navy">¡Prácticas de Laboratorio Completadas!</h3>
+            <p class="text-base text-slate-600">Has resuelto correctamente <strong>${labScore} de ${LAB_CHALLENGES.length}</strong> casos reales de peluquería y estética.</p>
+            <button onclick="restartLab()" class="px-6 py-3 rounded-2xl bg-mint-600 hover:bg-mint-500 text-white font-bold text-sm shadow-lg transition-all">
+              🔄 Repetir Casos Prácticos
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const c = LAB_CHALLENGES[labIdx];
+      labAnswered = false;
+
+      container.innerHTML = `
+        <div class="max-w-2xl mx-auto">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 rounded-full bg-mint-100 text-mint-800 text-xs font-bold">Caso Práctico ${labIdx + 1} de ${LAB_CHALLENGES.length}</span>
+            <span class="text-xs font-bold text-slate-500">Resueltos: ${labScore}</span>
+          </div>
+
+          <div class="bg-gradient-to-br from-slate-800 to-navy text-white p-6 rounded-3xl shadow-lg mb-6">
+            <h3 class="font-display font-bold text-lg text-mint-300 mb-2">${c.title}</h3>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed mb-3">${c.scenario}</p>
+            <p class="text-sm font-bold text-amber-300">👉 ${c.question}</p>
+          </div>
+
+          <div class="space-y-3">
+            ${c.options.map((opt, idx) => `
+              <button onclick="answerLab(${idx})" id="lab-opt-${idx}" class="w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-mint-500 hover:bg-mint-50/40 font-semibold text-sm sm:text-base text-navy transition-all">
+                ${opt.text}
+              </button>
+            `).join('')}
+          </div>
+
+          <div id="lab-feedback" class="hidden mt-5 p-4 rounded-2xl text-sm leading-relaxed"></div>
+
+          <div id="lab-next-wrap" class="hidden mt-5 flex justify-end">
+            <button onclick="nextLabChallenge()" class="px-6 py-3 rounded-2xl bg-navy hover:bg-slate-800 text-white font-bold text-sm">
+              ${labIdx === LAB_CHALLENGES.length - 1 ? 'Finalizar Laboratorio 🎓' : 'Siguiente Caso →'}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function answerLab(idx) {
+      if (labAnswered) return;
+      labAnswered = true;
+
+      const c = LAB_CHALLENGES[labIdx];
+      const chosen = c.options[idx];
+      if (chosen.correct) {
+        labScore++;
+        addPoints(10, 'Caso práctico resuelto');
+      }
+
+      c.options.forEach((opt, i) => {
+        const btn = document.getElementById(`lab-opt-${i}`);
+        btn.disabled = true;
+        if (opt.correct) {
+          btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-mint-500 bg-mint-50 font-bold text-sm sm:text-base text-mint-900';
+        } else if (i === idx && !opt.correct) {
+          btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-coral-500 bg-coral-50 font-medium text-sm sm:text-base text-coral-900';
+        } else {
+          btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-slate-100 text-slate-400 text-sm sm:text-base';
+        }
+      });
+
+      const fb = document.getElementById('lab-feedback');
+      fb.classList.remove('hidden');
+      fb.className = `mt-5 p-4 rounded-2xl text-sm leading-relaxed border ${chosen.correct ? 'bg-mint-50 border-mint-200 text-mint-900' : 'bg-coral-50 border-coral-200 text-coral-900'}`;
+      fb.textContent = chosen.feedback;
+
+      document.getElementById('lab-next-wrap').classList.remove('hidden');
+    }
+
+    function nextLabChallenge() {
+      labIdx++;
+      renderLab();
+    }
+
+    function restartLab() {
+      labIdx = 0;
+      labScore = 0;
+      renderLab();
+    }
+
+    // --- ACTIVIDAD 3: CLASIFICA EL INGREDIENTE (EMPAREJAMIENTO POR CLIC) ---
+    let selectedSubstanceId = null;
+    let matchedIds = [];
+    let shuffledFamilies = [];
+
+    function initMatchGame() {
+      selectedSubstanceId = null;
+      matchedIds = [];
+      shuffledFamilies = [...MATCH_ITEMS].sort(() => Math.random() - 0.5);
+      renderMatchGame();
+    }
+
+    function renderMatchGame() {
+      const container = document.getElementById('match-container');
+      const allDone = matchedIds.length === MATCH_ITEMS.length;
+
+      if (allDone) {
+        if (!state.matchCompleted) {
+          state.matchCompleted = true;
+          addPoints(30, '¡Todos los ingredientes clasificados!');
+          launchConfetti();
+        }
+        container.innerHTML = `
+          <div class="text-center max-w-lg mx-auto py-6 space-y-5">
+            <div class="text-6xl">🎯</div>
+            <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-navy">¡Clasificación Perfecta!</h3>
+            <p class="text-base text-slate-600">Has emparejado correctamente las <strong>10 sustancias químicas</strong> con su familia cosmética.</p>
+            <button onclick="initMatchGame()" class="px-6 py-3 rounded-2xl bg-lavender-600 hover:bg-lavender-500 text-white font-bold text-sm shadow-lg">
+              🔄 Jugar de nuevo
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="max-w-4xl mx-auto">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+            <div>
+              <h3 class="font-display font-bold text-lg text-navy">Empareja cada sustancia con su función o familia</h3>
+              <p class="text-xs text-slate-500">1. Pulsa una sustancia de la izquierda · 2. Pulsa su familia correspondiente a la derecha.</p>
+            </div>
+            <span class="px-3 py-1.5 rounded-xl bg-lavender-100 text-lavender-800 text-xs font-bold self-start">
+              Emparejados: ${matchedIds.length} / ${MATCH_ITEMS.length}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Columna Izquierda: Sustancias -->
+            <div class="space-y-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Sustancia / Ejemplo</span>
+              ${MATCH_ITEMS.map(item => {
+                const isMatched = matchedIds.includes(item.id);
+                const isSelected = selectedSubstanceId === item.id;
+                if (isMatched) {
+                  return `<div class="p-3 rounded-xl bg-mint-50 border border-mint-200 text-mint-700 text-xs sm:text-sm font-semibold flex items-center justify-between opacity-70"><span>${item.substance}</span><span>✓</span></div>`;
+                }
+                return `
+                  <button onclick="selectMatchSubstance('${item.id}')" class="w-full text-left p-3.5 rounded-xl border-2 text-xs sm:text-sm font-bold transition-all ${isSelected ? 'border-lavender-600 bg-lavender-100 text-lavender-900 shadow-sm scale-[1.01]' : 'border-slate-200 bg-white hover:border-lavender-300 text-navy'}">
+                    🧪 ${item.substance}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Columna Derecha: Familias -->
+            <div class="space-y-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Familia / Función Cosmética</span>
+              ${shuffledFamilies.map(item => {
+                const isMatched = matchedIds.includes(item.id);
+                if (isMatched) {
+                  return `<div class="p-3 rounded-xl bg-mint-50 border border-mint-200 text-mint-700 text-xs sm:text-sm font-semibold flex items-center justify-between opacity-70"><span>${item.family}</span><span>✓</span></div>`;
+                }
+                return `
+                  <button onclick="selectMatchFamily('${item.id}')" class="w-full text-left p-3.5 rounded-xl border-2 border-slate-200 bg-white hover:border-coral-400 hover:bg-coral-50/40 text-xs sm:text-sm font-semibold text-slate-700 transition-all">
+                    🏷️ ${item.family}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectMatchSubstance(id) {
+      selectedSubstanceId = id;
+      renderMatchGame();
+    }
+
+    function selectMatchFamily(targetId) {
+      if (!selectedSubstanceId) {
+        showToast('Primero selecciona una sustancia de la izquierda', '👈');
+        return;
+      }
+
+      if (selectedSubstanceId === targetId) {
+        matchedIds.push(targetId);
+        selectedSubstanceId = null;
+        addPoints(5, '¡Pareja correcta!');
+        renderMatchGame();
+      } else {
+        selectedSubstanceId = null;
+        showToast('No coinciden. ¡Inténtalo de nuevo!', '❌');
+        renderMatchGame();
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 10. REINICIO DE PROGRESO Y CONFETI
+    // -------------------------------------------------------------------------
+    function openResetModal() {
+      const m = document.getElementById('reset-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeResetModal() {
+      const m = document.getElementById('reset-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function confirmResetProgress() {
+      state = {
+        currentSlide: 0,
+        points: 0,
+        readTopics: [],
+        masteredCards: [],
+        bestQuizScore: null,
+        labCompleted: false,
+        matchCompleted: false
+      };
+      saveState();
+      closeResetModal();
+      renderTopicsGrid();
+      updateFlashcardView();
+      restartQuiz();
+      restartLab();
+      initMatchGame();
+      goToSlide(0);
+      showToast('Progreso reiniciado a cero', '🔄');
+    }
+
+    // Animación sencilla de confeti sin librerías externas
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ['#8B5CF6', '#F43F5E', '#10B981', '#F59E0B', '#38BDF8'];
+      const pieces = Array.from({ length: 90 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 40 + 10,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        tilt: Math.random() * 10 - 5
+      }));
+
+      let frame = 0;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          ctx.beginPath();
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.r, p.r * 1.4);
+          p.y += Math.cos(frame + p.d) + 3;
+          p.x += Math.sin(frame) * 1.5;
+        });
+        frame += 0.05;
+        if (frame < 8) {
+          requestAnimationFrame(draw);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      draw();
+    }
+
+    // -------------------------------------------------------------------------
+    // INICIALIZACIÓN AL CARGAR LA PÁGINA
+    // -------------------------------------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      updateDashboardUI();
+      renderCategoryFilters();
+      renderTopicsGrid();
+      renderFlashcardFilters();
+      updateFlashcardView();
+      switchActivity('quiz');
+      renderQuiz();
+      renderLab();
+      initMatchGame();
+      goToSlide(0);
+    });
+  </script>
+</body>
+</html>
